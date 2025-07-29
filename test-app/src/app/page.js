@@ -32,21 +32,22 @@ ChartJS.register(
   RadialLinearScale
 );
 
-// Horizon UI カラーパレット - 寒色系統一
+// カスタムカラーパレット - ベースカラー#6988A9の濃淡（明→暗の順）
 const horizonColors = {
-  primary: "#2563EB", // ブルー
-  secondary: "#0EA5E9", // スカイブルー
-  success: "#0891B2", // シアン
-  error: "#1E40AF", // ダークブルー
-  warning: "#0284C7", // ブルー400
-  info: "#06B6D4", // シアン500
-  purple: "#6366F1", // インディゴ
-  pink: "#3B82F6", // ブルー500
-  orange: "#0369A1", // ブルー700
-  teal: "#0D9488", // ティール600
-  indigo: "#4F46E5", // インディゴ600
-  cyan: "#0891B2", // シアン600
-  gradient: "linear-gradient(135deg, #2563EB 0%, #06B6D4 100%)",
+  primary: "#B8CDE0", // 1. 最ライト（20%明るく）
+  secondary: "#A3BFDB", // 2. ライト（15%明るく）
+  success: "#8FA8C7", // 3. ミディアムライト（10%明るく）
+  error: "#7A98BA", // 4. ライト（5%明るく）
+  warning: "#6988A9", // 5. ベースカラー
+  info: "#5C7A95", // 6. ミディアムダーク（10%暗く）
+  purple: "#4F6C82", // 7. ダーク（15%暗く）
+  pink: "#425E6F", // 8. ミディアムダーク2（20%暗く）
+  orange: "#36505C", // 9. ダーク2（25%暗く）
+  teal: "#294248", // 10. 最ダーク（30%暗く）
+  indigo: "#1F3135", // 11. 超ダーク（35%暗く）
+  cyan: "#152122", // 12. 極ダーク（40%暗く）
+  focus: "#AAC678", // フォーカスカラー（緑系アクセント）
+  gradient: "linear-gradient(135deg, #6988A9 0%, #8FA8C7 100%)",
   cardBg: "#FFFFFF",
   textPrimary: "#1E293B",
   textSecondary: "#64748B",
@@ -54,7 +55,7 @@ const horizonColors = {
 };
 
 // カスタム矢印アイコンコンポーネント
-const ArrowUpIcon = ({ color = "#0891B2" }) => (
+const ArrowUpIcon = ({ color = "#AAC678" }) => (
   <Box as="span" display="inline-block" mr={1}>
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
       <path
@@ -69,7 +70,7 @@ ArrowUpIcon.propTypes = {
   color: PropTypes.string,
 };
 
-const ArrowDownIcon = ({ color = "#1E40AF" }) => (
+const ArrowDownIcon = ({ color = "#36505C" }) => (
   <Box as="span" display="inline-block" mr={1}>
     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
       <path
@@ -137,9 +138,9 @@ const createGradient = (ctx, chartArea) => {
     0,
     chartArea.top
   );
-  gradient.addColorStop(0, "rgba(37, 99, 235, 0.05)");
-  gradient.addColorStop(0.5, "rgba(37, 99, 235, 0.15)");
-  gradient.addColorStop(1, "rgba(37, 99, 235, 0.3)");
+  gradient.addColorStop(0, "rgba(184, 205, 224, 0.05)"); // primary color
+  gradient.addColorStop(0.5, "rgba(184, 205, 224, 0.15)");
+  gradient.addColorStop(1, "rgba(184, 205, 224, 0.3)");
   return gradient;
 };
 
@@ -242,7 +243,7 @@ const lineData = {
     {
       label: "売上高 (万円)",
       data: [420, 580, 450, 720, 890, 650, 980, 1120, 850, 1250, 1380, 1450],
-      borderColor: horizonColors.primary,
+      borderColor: horizonColors.warning, // ベースカラー
       backgroundColor: (context) => {
         const ctx = context.chart.ctx;
         const chartArea = context.chart.chartArea;
@@ -253,7 +254,7 @@ const lineData = {
       tension: 0.4,
       pointRadius: 6,
       pointBackgroundColor: "#FFFFFF",
-      pointBorderColor: horizonColors.primary,
+      pointBorderColor: horizonColors.warning, // ベースカラー
       pointBorderWidth: 3,
       fill: true,
     },
@@ -267,10 +268,16 @@ const doughnutData = {
     {
       data: [45, 30, 15, 10],
       backgroundColor: [
-        horizonColors.primary,
-        horizonColors.secondary,
-        horizonColors.success,
-        horizonColors.info,
+        horizonColors.primary, // 1. 最ライト
+        horizonColors.secondary, // 2. ライト
+        horizonColors.success, // 3. ミディアムライト
+        horizonColors.error, // 4. ライト
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focus, // フォーカスカラー
+        horizonColors.focus,
+        horizonColors.focus,
+        horizonColors.focus,
       ],
       borderWidth: 0,
       cutout: "70%",
@@ -284,14 +291,22 @@ const barData = {
   datasets: [
     {
       label: "売上 (億円)",
-      data: [25, 18, 12, 8, 6, 5],
+      data: [25, 18, 12, 8, 6, 5], // 平均: 12.33 → Nagoya(12)が最も平均に近い
       backgroundColor: [
-        horizonColors.primary,
-        horizonColors.secondary,
-        horizonColors.success,
-        horizonColors.warning,
-        horizonColors.info,
-        horizonColors.indigo,
+        horizonColors.primary, // 1. Tokyo: 最ライト
+        horizonColors.secondary, // 2. Osaka: ライト
+        horizonColors.focus, // 3. Nagoya: フォーカスカラー（平均に最も近い）
+        horizonColors.error, // 4. Fukuoka: ライト
+        horizonColors.warning, // 5. Sendai: ベースカラー
+        horizonColors.info, // 6. Sapporo: ミディアムダーク
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focus, // ホバー時フォーカスカラー
+        horizonColors.focus,
+        horizonColors.focus,
+        horizonColors.focus,
+        horizonColors.focus,
+        horizonColors.focus,
       ],
       borderRadius: 8,
       borderSkipped: false,
@@ -306,11 +321,18 @@ const pieData = {
     {
       data: [35, 25, 20, 10, 10],
       backgroundColor: [
-        horizonColors.primary,
-        horizonColors.secondary,
-        horizonColors.success,
-        horizonColors.warning,
-        horizonColors.indigo,
+        horizonColors.focus, // 1. 自社: フォーカスカラー（最も値が大きい35%）
+        horizonColors.secondary, // 2. 競合A: ライト
+        horizonColors.success, // 3. 競合B: ミディアムライト
+        horizonColors.error, // 4. 競合C: ライト
+        horizonColors.warning, // 5. その他: ベースカラー
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focus, // 自社: フォーカスカラー維持
+        horizonColors.focus, // 競合A: ホバー時フォーカスカラー
+        horizonColors.focus, // 競合B: ホバー時フォーカスカラー
+        horizonColors.focus, // 競合C: ホバー時フォーカスカラー
+        horizonColors.focus, // その他: ホバー時フォーカスカラー
       ],
       borderWidth: 0,
     },
@@ -324,18 +346,20 @@ const radarData = {
     {
       label: "自社",
       data: [85, 90, 75, 88, 92, 87],
-      backgroundColor: "rgba(37, 99, 235, 0.2)",
-      borderColor: horizonColors.primary,
+      backgroundColor: "rgba(184, 205, 224, 0.2)", // primary color
+      borderColor: horizonColors.warning, // ベースカラー
       borderWidth: 3,
-      pointBackgroundColor: horizonColors.primary,
+      pointBackgroundColor: horizonColors.warning, // ベースカラー
       pointBorderColor: "#fff",
       pointBorderWidth: 2,
       pointRadius: 6,
+      pointHoverBackgroundColor: horizonColors.focus, // ホバー時フォーカスカラー
+      pointHoverBorderColor: "#fff",
     },
     {
       label: "業界平均",
       data: [70, 75, 80, 65, 70, 75],
-      backgroundColor: "rgba(14, 165, 233, 0.2)",
+      backgroundColor: "rgba(163, 191, 219, 0.2)", // secondary color
       borderColor: horizonColors.secondary,
       borderWidth: 2,
       pointBackgroundColor: horizonColors.secondary,
@@ -353,16 +377,17 @@ const areaData = {
     {
       label: "Customer Satisfaction",
       data: [85, 88, 92, 95],
-      backgroundColor: "rgba(8, 145, 178, 0.3)",
+      backgroundColor: "rgba(143, 168, 199, 0.3)", // success color
       borderColor: horizonColors.success,
       borderWidth: 3,
       fill: true,
       tension: 0.4,
+      pointHoverBackgroundColor: horizonColors.focus, // ホバー時フォーカスカラー
     },
     {
       label: "Employee Engagement",
       data: [78, 82, 86, 89],
-      backgroundColor: "rgba(2, 132, 199, 0.3)",
+      backgroundColor: "rgba(105, 136, 169, 0.3)", // warning color (ベースカラー)
       borderColor: horizonColors.warning,
       borderWidth: 3,
       fill: true,
@@ -371,7 +396,7 @@ const areaData = {
     {
       label: "Innovation Index",
       data: [72, 75, 81, 87],
-      backgroundColor: "rgba(6, 182, 212, 0.3)",
+      backgroundColor: "rgba(92, 122, 149, 0.3)", // info color
       borderColor: horizonColors.info,
       borderWidth: 3,
       fill: true,
@@ -395,12 +420,20 @@ const horizontalBarData = {
       label: "Available Data (Free Plan)",
       data: [75, 60, 85, 45, 70, 55], // フリープランで見える範囲
       backgroundColor: [
-        horizonColors.primary,
-        horizonColors.secondary,
-        horizonColors.success,
-        horizonColors.warning,
-        horizonColors.info,
-        horizonColors.indigo,
+        horizonColors.primary, // 1. 最ライト
+        horizonColors.secondary, // 2. ライト
+        horizonColors.success, // 3. ミディアムライト
+        horizonColors.error, // 4. ライト
+        horizonColors.warning, // 5. ベースカラー
+        horizonColors.info, // 6. ミディアムダーク
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focus, // ホバー時フォーカスカラー
+        horizonColors.focus,
+        horizonColors.focus,
+        horizonColors.focus,
+        horizonColors.focus,
+        horizonColors.focus,
       ],
       borderRadius: 6,
       borderSkipped: false,
@@ -497,7 +530,7 @@ const FreemiumChartContainer = ({
           )}
         </VStack>
         <Box
-          bg="linear-gradient(135deg, #2563EB, #06B6D4)"
+          bg="linear-gradient(135deg, #6988A9, #A3BFDB)"
           color="white"
           px={3}
           py={1}
@@ -508,7 +541,7 @@ const FreemiumChartContainer = ({
           transition="all 0.2s"
           _hover={{
             transform: "scale(1.05)",
-            boxShadow: "0 4px 12px rgba(37, 99, 235, 0.4)",
+            boxShadow: "0 4px 12px rgba(105, 136, 169, 0.4)",
           }}
           onClick={onUpgrade}
         >
@@ -750,7 +783,7 @@ export default function Home() {
   return (
     <Box
       minH="100vh"
-      bg="linear-gradient(135deg, #1e40af 0%, #06b6d4 100%)"
+      bg="linear-gradient(135deg, #4F6C82 0%, #A3BFDB 100%)"
       p={8}
     >
       <Flex
@@ -789,7 +822,7 @@ export default function Home() {
             value="$2.4B"
             helpText="12.5% YoY"
             valueColor={horizonColors.primary}
-            helpTextColor={horizonColors.success}
+            helpTextColor={horizonColors.focus}
             icon={<ArrowUpIcon />}
           />
 
@@ -798,7 +831,7 @@ export default function Home() {
             value="34.8%"
             helpText="vs Competition"
             valueColor={horizonColors.success}
-            helpTextColor={horizonColors.success}
+            helpTextColor={horizonColors.focus}
             icon={<ArrowUpIcon />}
           />
 
@@ -815,7 +848,7 @@ export default function Home() {
             value="89.1%"
             helpText="Top 5% Global"
             valueColor={horizonColors.info}
-            helpTextColor={horizonColors.success}
+            helpTextColor={horizonColors.focus}
             icon={<ArrowUpIcon />}
           />
         </HStack>
