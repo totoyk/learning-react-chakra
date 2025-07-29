@@ -47,6 +47,7 @@ const horizonColors = {
   indigo: "#1F3135", // 11. 超ダーク（35%暗く）
   cyan: "#152122", // 12. 極ダーク（40%暗く）
   focus: "#AAC678", // フォーカスカラー（緑系アクセント）
+  focusOrange: "#F09B6D", // 比較用オレンジフォーカスカラー
   gradient: "linear-gradient(135deg, #6988A9 0%, #8FA8C7 100%)",
   cardBg: "#FFFFFF",
   textPrimary: "#1E293B",
@@ -441,7 +442,83 @@ const horizontalBarData = {
   ],
 };
 
-// フリーミアム用のカスタムプラグイン
+// 8. オレンジフォーカスカラー比較用 - ドーナツチャート
+const doughnutDataOrange = {
+  labels: ["Enterprise", "SMB", "Startup", "Government"],
+  datasets: [
+    {
+      data: [45, 30, 15, 10],
+      backgroundColor: [
+        horizonColors.primary, // 1. 最ライト
+        horizonColors.secondary, // 2. ライト
+        horizonColors.success, // 3. ミディアムライト
+        horizonColors.error, // 4. ライト
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focusOrange, // オレンジフォーカスカラー
+        horizonColors.focusOrange,
+        horizonColors.focusOrange,
+        horizonColors.focusOrange,
+      ],
+      borderWidth: 0,
+      cutout: "70%",
+    },
+  ],
+};
+
+// 9. オレンジフォーカスカラー比較用 - 棒グラフ
+const barDataOrange = {
+  labels: ["Tokyo", "Osaka", "Nagoya", "Fukuoka", "Sendai", "Sapporo"],
+  datasets: [
+    {
+      label: "売上 (億円)",
+      data: [25, 18, 12, 8, 6, 5],
+      backgroundColor: [
+        horizonColors.primary, // 1. Tokyo: 最ライト
+        horizonColors.secondary, // 2. Osaka: ライト
+        horizonColors.focusOrange, // 3. Nagoya: オレンジフォーカスカラー（平均に最も近い）
+        horizonColors.error, // 4. Fukuoka: ライト
+        horizonColors.warning, // 5. Sendai: ベースカラー
+        horizonColors.info, // 6. Sapporo: ミディアムダーク
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focusOrange, // ホバー時オレンジフォーカスカラー
+        horizonColors.focusOrange,
+        horizonColors.focusOrange,
+        horizonColors.focusOrange,
+        horizonColors.focusOrange,
+        horizonColors.focusOrange,
+      ],
+      borderRadius: 8,
+      borderSkipped: false,
+    },
+  ],
+};
+
+// 10. オレンジフォーカスカラー比較用 - 円グラフ
+const pieDataOrange = {
+  labels: ["自社", "競合A", "競合B", "競合C", "その他"],
+  datasets: [
+    {
+      data: [35, 25, 20, 10, 10],
+      backgroundColor: [
+        horizonColors.focusOrange, // 1. 自社: オレンジフォーカスカラー（最も値が大きい35%）
+        horizonColors.secondary, // 2. 競合A: ライト
+        horizonColors.success, // 3. 競合B: ミディアムライト
+        horizonColors.error, // 4. 競合C: ライト
+        horizonColors.warning, // 5. その他: ベースカラー
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focusOrange, // 自社: オレンジフォーカスカラー維持
+        horizonColors.focusOrange, // 競合A: ホバー時オレンジフォーカスカラー
+        horizonColors.focusOrange, // 競合B: ホバー時オレンジフォーカスカラー
+        horizonColors.focusOrange, // 競合C: ホバー時オレンジフォーカスカラー
+        horizonColors.focusOrange, // その他: ホバー時オレンジフォーカスカラー
+      ],
+      borderWidth: 0,
+    },
+  ],
+};
 const freemiumPlugin = {
   id: "freemium",
   afterDraw: (chart) => {
@@ -926,6 +1003,43 @@ export default function Home() {
                 plugins={[freemiumPlugin]}
               />
             </FreemiumChartContainer>
+          </Box>
+
+          {/* オレンジフォーカスカラー比較セクション */}
+          <Box mt={8} w="full">
+            <Heading size="lg" color="white" mb={6} textAlign="center">
+              Focus Color Comparison: Orange (#F09B6D)
+            </Heading>
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(3, 1fr)"
+              gap={6}
+              w="full"
+            >
+              {/* オレンジフォーカス - ドーナツチャート */}
+              <ChartContainer
+                title="Customer Segments (Orange Focus)"
+                subtitle="Revenue distribution with orange focus"
+              >
+                <Doughnut data={doughnutDataOrange} options={doughnutOptions} />
+              </ChartContainer>
+
+              {/* オレンジフォーカス - 棒グラフ */}
+              <ChartContainer
+                title="Regional Performance (Orange Focus)"
+                subtitle="Sales with orange focus color"
+              >
+                <Bar data={barDataOrange} options={barOptions} />
+              </ChartContainer>
+
+              {/* オレンジフォーカス - 円グラフ */}
+              <ChartContainer
+                title="Market Position (Orange Focus)"
+                subtitle="Market share with orange focus"
+              >
+                <Pie data={pieDataOrange} options={pieOptions} />
+              </ChartContainer>
+            </Box>
           </Box>
         </Box>
       </Flex>
