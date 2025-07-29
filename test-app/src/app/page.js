@@ -1216,7 +1216,10 @@ export default function Home() {
                 title="Customer Segments (Lemon Yellow Focus)"
                 subtitle="Revenue distribution with lemon yellow focus"
               >
-                <Doughnut data={doughnutDataLimeYellow} options={doughnutOptions} />
+                <Doughnut
+                  data={doughnutDataLimeYellow}
+                  options={doughnutOptions}
+                />
               </ChartContainer>
 
               {/* ライムイエローフォーカス - 棒グラフ */}
