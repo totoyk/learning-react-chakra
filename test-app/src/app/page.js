@@ -48,6 +48,8 @@ const horizonColors = {
   cyan: "#152122", // 12. 極ダーク（40%暗く）
   focus: "#AAC678", // フォーカスカラー（緑系アクセント）
   focusOrange: "#F09B6D", // 比較用オレンジフォーカスカラー
+  focusLimeYellow: "#E6D335", // 比較用くすんだレモンイエローフォーカスカラー
+  focusPurple: "#8B7BAD", // AIおすすめパープルフォーカスカラー
   gradient: "linear-gradient(135deg, #6988A9 0%, #8FA8C7 100%)",
   cardBg: "#FFFFFF",
   textPrimary: "#1E293B",
@@ -514,6 +516,162 @@ const pieDataOrange = {
         horizonColors.focusOrange, // 競合B: ホバー時オレンジフォーカスカラー
         horizonColors.focusOrange, // 競合C: ホバー時オレンジフォーカスカラー
         horizonColors.focusOrange, // その他: ホバー時オレンジフォーカスカラー
+      ],
+      borderWidth: 0,
+    },
+  ],
+};
+
+// 11. ライムイエローフォーカスカラー比較用 - ドーナツチャート
+const doughnutDataLimeYellow = {
+  labels: ["Enterprise", "SMB", "Startup", "Government"],
+  datasets: [
+    {
+      data: [45, 30, 15, 10],
+      backgroundColor: [
+        horizonColors.primary, // 1. 最ライト
+        horizonColors.secondary, // 2. ライト
+        horizonColors.success, // 3. ミディアムライト
+        horizonColors.error, // 4. ライト
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focusLimeYellow, // ライムイエローフォーカスカラー
+        horizonColors.focusLimeYellow,
+        horizonColors.focusLimeYellow,
+        horizonColors.focusLimeYellow,
+      ],
+      borderWidth: 0,
+      cutout: "70%",
+    },
+  ],
+};
+
+// 12. ライムイエローフォーカスカラー比較用 - 棒グラフ
+const barDataLimeYellow = {
+  labels: ["Tokyo", "Osaka", "Nagoya", "Fukuoka", "Sendai", "Sapporo"],
+  datasets: [
+    {
+      label: "売上 (億円)",
+      data: [25, 18, 12, 8, 6, 5],
+      backgroundColor: [
+        horizonColors.primary, // 1. Tokyo: 最ライト
+        horizonColors.secondary, // 2. Osaka: ライト
+        horizonColors.focusLimeYellow, // 3. Nagoya: ライムイエローフォーカスカラー（平均に最も近い）
+        horizonColors.error, // 4. Fukuoka: ライト
+        horizonColors.warning, // 5. Sendai: ベースカラー
+        horizonColors.info, // 6. Sapporo: ミディアムダーク
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focusLimeYellow, // ホバー時ライムイエローフォーカスカラー
+        horizonColors.focusLimeYellow,
+        horizonColors.focusLimeYellow,
+        horizonColors.focusLimeYellow,
+        horizonColors.focusLimeYellow,
+        horizonColors.focusLimeYellow,
+      ],
+      borderRadius: 8,
+      borderSkipped: false,
+    },
+  ],
+};
+
+// 13. ライムイエローフォーカスカラー比較用 - 円グラフ
+const pieDataLimeYellow = {
+  labels: ["自社", "競合A", "競合B", "競合C", "その他"],
+  datasets: [
+    {
+      data: [35, 25, 20, 10, 10],
+      backgroundColor: [
+        horizonColors.focusLimeYellow, // 1. 自社: ライムイエローフォーカスカラー（最も値が大きい35%）
+        horizonColors.secondary, // 2. 競合A: ライト
+        horizonColors.success, // 3. 競合B: ミディアムライト
+        horizonColors.error, // 4. 競合C: ライト
+        horizonColors.warning, // 5. その他: ベースカラー
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focusLimeYellow, // 自社: ライムイエローフォーカスカラー維持
+        horizonColors.focusLimeYellow, // 競合A: ホバー時ライムイエローフォーカスカラー
+        horizonColors.focusLimeYellow, // 競合B: ホバー時ライムイエローフォーカスカラー
+        horizonColors.focusLimeYellow, // 競合C: ホバー時ライムイエローフォーカスカラー
+        horizonColors.focusLimeYellow, // その他: ホバー時ライムイエローフォーカスカラー
+      ],
+      borderWidth: 0,
+    },
+  ],
+};
+
+// 14. パープルフォーカスカラー比較用 - ドーナツチャート
+const doughnutDataPurple = {
+  labels: ["Enterprise", "SMB", "Startup", "Government"],
+  datasets: [
+    {
+      data: [45, 30, 15, 10],
+      backgroundColor: [
+        horizonColors.primary, // 1. 最ライト
+        horizonColors.secondary, // 2. ライト
+        horizonColors.success, // 3. ミディアムライト
+        horizonColors.error, // 4. ライト
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focusPurple, // パープルフォーカスカラー
+        horizonColors.focusPurple,
+        horizonColors.focusPurple,
+        horizonColors.focusPurple,
+      ],
+      borderWidth: 0,
+      cutout: "70%",
+    },
+  ],
+};
+
+// 15. パープルフォーカスカラー比較用 - 棒グラフ
+const barDataPurple = {
+  labels: ["Tokyo", "Osaka", "Nagoya", "Fukuoka", "Sendai", "Sapporo"],
+  datasets: [
+    {
+      label: "売上 (億円)",
+      data: [25, 18, 12, 8, 6, 5],
+      backgroundColor: [
+        horizonColors.primary, // 1. Tokyo: 最ライト
+        horizonColors.secondary, // 2. Osaka: ライト
+        horizonColors.focusPurple, // 3. Nagoya: パープルフォーカスカラー（平均に最も近い）
+        horizonColors.error, // 4. Fukuoka: ライト
+        horizonColors.warning, // 5. Sendai: ベースカラー
+        horizonColors.info, // 6. Sapporo: ミディアムダーク
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focusPurple, // ホバー時パープルフォーカスカラー
+        horizonColors.focusPurple,
+        horizonColors.focusPurple,
+        horizonColors.focusPurple,
+        horizonColors.focusPurple,
+        horizonColors.focusPurple,
+      ],
+      borderRadius: 8,
+      borderSkipped: false,
+    },
+  ],
+};
+
+// 16. パープルフォーカスカラー比較用 - 円グラフ
+const pieDataPurple = {
+  labels: ["自社", "競合A", "競合B", "競合C", "その他"],
+  datasets: [
+    {
+      data: [35, 25, 20, 10, 10],
+      backgroundColor: [
+        horizonColors.focusPurple, // 1. 自社: パープルフォーカスカラー（最も値が大きい35%）
+        horizonColors.secondary, // 2. 競合A: ライト
+        horizonColors.success, // 3. 競合B: ミディアムライト
+        horizonColors.error, // 4. 競合C: ライト
+        horizonColors.warning, // 5. その他: ベースカラー
+      ],
+      hoverBackgroundColor: [
+        horizonColors.focusPurple, // 自社: パープルフォーカスカラー維持
+        horizonColors.focusPurple, // 競合A: ホバー時パープルフォーカスカラー
+        horizonColors.focusPurple, // 競合B: ホバー時パープルフォーカスカラー
+        horizonColors.focusPurple, // 競合C: ホバー時パープルフォーカスカラー
+        horizonColors.focusPurple, // その他: ホバー時パープルフォーカスカラー
       ],
       borderWidth: 0,
     },
@@ -1038,6 +1196,80 @@ export default function Home() {
                 subtitle="Market share with orange focus"
               >
                 <Pie data={pieDataOrange} options={pieOptions} />
+              </ChartContainer>
+            </Box>
+          </Box>
+
+          {/* ライムイエローフォーカスカラー比較セクション */}
+          <Box mt={8} w="full">
+            <Heading size="lg" color="white" mb={6} textAlign="center">
+              Focus Color Comparison: Lemon Yellow (#E6D335)
+            </Heading>
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(3, 1fr)"
+              gap={6}
+              w="full"
+            >
+              {/* ライムイエローフォーカス - ドーナツチャート */}
+              <ChartContainer
+                title="Customer Segments (Lemon Yellow Focus)"
+                subtitle="Revenue distribution with lemon yellow focus"
+              >
+                <Doughnut data={doughnutDataLimeYellow} options={doughnutOptions} />
+              </ChartContainer>
+
+              {/* ライムイエローフォーカス - 棒グラフ */}
+              <ChartContainer
+                title="Regional Performance (Lemon Yellow Focus)"
+                subtitle="Sales with lemon yellow focus color"
+              >
+                <Bar data={barDataLimeYellow} options={barOptions} />
+              </ChartContainer>
+
+              {/* ライムイエローフォーカス - 円グラフ */}
+              <ChartContainer
+                title="Market Position (Lemon Yellow Focus)"
+                subtitle="Market share with lemon yellow focus"
+              >
+                <Pie data={pieDataLimeYellow} options={pieOptions} />
+              </ChartContainer>
+            </Box>
+          </Box>
+
+          {/* パープルフォーカスカラー比較セクション（AIおすすめ） */}
+          <Box mt={8} w="full">
+            <Heading size="lg" color="white" mb={6} textAlign="center">
+              Focus Color Comparison: AI Recommended Purple (#8B7BAD)
+            </Heading>
+            <Box
+              display="grid"
+              gridTemplateColumns="repeat(3, 1fr)"
+              gap={6}
+              w="full"
+            >
+              {/* パープルフォーカス - ドーナツチャート */}
+              <ChartContainer
+                title="Customer Segments (Purple Focus)"
+                subtitle="Revenue distribution with AI recommended purple"
+              >
+                <Doughnut data={doughnutDataPurple} options={doughnutOptions} />
+              </ChartContainer>
+
+              {/* パープルフォーカス - 棒グラフ */}
+              <ChartContainer
+                title="Regional Performance (Purple Focus)"
+                subtitle="Sales with AI recommended purple focus"
+              >
+                <Bar data={barDataPurple} options={barOptions} />
+              </ChartContainer>
+
+              {/* パープルフォーカス - 円グラフ */}
+              <ChartContainer
+                title="Market Position (Purple Focus)"
+                subtitle="Market share with AI recommended purple"
+              >
+                <Pie data={pieDataPurple} options={pieOptions} />
               </ChartContainer>
             </Box>
           </Box>
